@@ -69,6 +69,10 @@ define apt::key (
               ensure_packages(['gnupg'])
               Apt::Key<| title == $title |>
             }
+            if versioncmp($facts['os']['release']['major'], '10') >= 0 {
+              ensure_packages(['gpg'])
+              Apt::Key<| title == $title |>
+            }
           }
           'Ubuntu': {
             if versioncmp($facts['os']['release']['full'], '17.04') >= 0 {
